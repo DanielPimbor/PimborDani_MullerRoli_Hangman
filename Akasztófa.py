@@ -45,22 +45,36 @@ while True:
         tipp_szo = input(f'Tippeld meg a szót: (Ennyi tipped van még hátra: {tipp_szo_szama})')
         tipp_szo_szama -= 1
 
+        if tipp_szo.lower() == megoldas:
+            print('Helyesen megtippelted a szót, nyertél!')
+            break
+
+        elif tipp_szo !=  megoldas: 
+            print("Nem találtad el a szót!")
+            print(f'Már csak {tipp_szo_szama} tipped van hátra.')
+
     else:
         if tipp_betű in megoldas:
             print('Helyesen eltaláltál egy betűt.')
 
+            #itt alakitja at az xes megoldas helyes betuit
             for i, betu in enumerate(megoldas):
-
                 if betu == tipp_betű:
-                    megoldas_rejtett[i] = betu
-        
+                    megoldas_rejtett[i] = tipp_betű
+
+            print('Megoldásod eddig:')
             print(megoldas_rejtett)
+            print('Helytelen betűk eddig:')
+            print(helytelen_betűk)
         
         elif tipp_betű not in megoldas:
             print('Nem találtad el a betűt.')
             helytelen_betűk.append(tipp_betű)
-            
+            print('Megoldásod eddig:')
+            print(megoldas_rejtett)
+            print('Helytelen betűk eddig:')
+            print(helytelen_betűk)
 
     if 'X' not in megoldas_rejtett:
-        print('Nyertél!')
+        print('Eltaláltad az összes betűt, nyertél!')
         break
