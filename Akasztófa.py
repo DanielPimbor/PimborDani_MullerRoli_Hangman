@@ -7,7 +7,8 @@ helytelen_betűk = []
 tipp_szo_szama = 3
 
 #random szavak
-szavak = ["ablak"]
+szavak =["alma", "asztal", "autó", "banán", "bicikli", "ceruza", "cipő", "dió", "elefánt", "erdő", "fa", "fagyi", "hal", "ház", "iskola", "kabát", "kutya", "lámpa", "macska", "nadrág", "narancs", "olló", "póló", "szék", "szilva", "táska", "telefon", "toll", "vonat", "zebra"]
+
 
 megoldas = random.choice(szavak)
 megoldas_rejtett = ['X' for _ in megoldas]
@@ -27,15 +28,38 @@ print('Szavat úgy tudsz tippelni, ha a betű helyett egy 0-át írsz.')
 print('---------------------------------------------')
 print('Jó szórakozást!')
 
+while True:
+    try:
+        nehezseg_valasztas = int(input(
+            'Milyen nehézségen akarsz játszani?\n'
+            '1 - Könnyű (10 élet)\n'
+            '2 - Közepes (7 élet)\n'
+            '3 - Nehéz (5 élet)\n'
+            'Választás: '
+        ))
+
+        if nehezseg_valasztas == 1:
+            eletek = 10
+            break
+        elif nehezseg_valasztas == 2:
+            eletek = 7
+            break
+        elif nehezseg_valasztas == 3:
+            eletek = 5
+            break
+        else:
+            print("Csak 1, 2 vagy 3 lehet!")
+    except ValueError:
+        print("Számot adj meg!")
 
 while True:
     while True:
         try:
-            tipp_betű = input("Írj ide egy betűt: ").lower()
+            tipp_betű = input("Írj ide egy betűt (tippeléshez 0-át): ").lower()
             engedélyezett_betu = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','sz','gy','ty','zs','cs','ly']
             
             if tipp_betű not in engedélyezett_betu and tipp_betű != '0':
-                raise ValueError("Helytelen betű, próbáld újra!")
+                raise ValueError("Helytelen bemenet, próbáld újra!")
             # csak akkor törünk ki a try-except-ből, ha helyes a betű
             break
         except ValueError as e:
@@ -56,11 +80,13 @@ while True:
     else:
         if tipp_betű in megoldas:
             print('Helyesen eltaláltál egy betűt.')
-
-            #itt alakitja at az xes megoldas helyes betuit
-            for i, betu in enumerate(megoldas):
-                if betu == tipp_betű:
-                    megoldas_rejtett[i] = tipp_betű
+            if tipp_betű not in megoldas_rejtett:
+                #itt alakitja at az xes megoldas helyes betuit
+                for i, betu in enumerate(megoldas):
+                    if betu == tipp_betű:
+                        megoldas_rejtett[i] = tipp_betű
+            else:
+                print("Már megtippelted ezt a betűt!")
 
             print('Megoldásod eddig:')
             print(megoldas_rejtett)
@@ -69,11 +95,19 @@ while True:
         
         elif tipp_betű not in megoldas:
             print('Nem találtad el a betűt.')
-            helytelen_betűk.append(tipp_betű)
+            if tipp_betű not in helytelen_betűk:
+                helytelen_betűk.append(tipp_betű)
+                
+            else:
+                print("Már megtippelted ezt a betűt!")
             print('Megoldásod eddig:')
             print(megoldas_rejtett)
             print('Helytelen betűk eddig:')
             print(helytelen_betűk)
+            eletek -= 1
+            if eletek == 0:
+                print('Meghaltál, vége a játéknak.')
+                break
 
     if 'X' not in megoldas_rejtett:
         print('Eltaláltad az összes betűt, nyertél!')
