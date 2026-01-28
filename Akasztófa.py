@@ -200,6 +200,7 @@ while True:
             print("Nem találtad el a szót!")
             print('')
             print(f'Már csak {tipp_szo_szama} tipped van hátra.')
+            print('')
 
     else:
         if tipp_betű in megoldas:
@@ -246,6 +247,7 @@ while True:
                 print('Meghaltál, vége a játéknak.')
                 print('')
                 print(f'A megoldás ez volt: {megoldas}')
+                print('')
                 break
 
     if 'X' not in megoldas_rejtett:
