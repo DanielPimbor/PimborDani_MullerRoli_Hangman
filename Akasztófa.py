@@ -11,6 +11,96 @@ szavak =["alma", "asztal", "autó", "banán", "bicikli", "ceruza", "cipő", "di�
 
 
 
+#///////////////////////////////////////////////////////////////////
+
+#kepek
+
+HANGMANPICS = [
+'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''',
+'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''',
+'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''',
+'''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========
+''',
+'''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''',
+'''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''',
+'''
+  +---+
+      |
+      |
+      |
+      |
+      |
+=========
+''',
+'''
+      +
+      |
+      |
+      |
+      |
+      |
+=========
+''',
+'''
+      '
+
+
+
+
+
+=========
+'''
+]
+#///////////////////////////////////////////////////////////////////
+
+
 megoldas = random.choice(szavak)
 megoldas_rejtett = ['X' for _ in megoldas]
 
@@ -98,7 +188,10 @@ while True:
                         megoldas_rejtett[i] = tipp_betű
             else:
                 print("Már megtippelted ezt a betűt!")
-
+            hangman_index = HANGMANPICS[eletek-1]
+            if hangman_index < 0:
+                hangman_index = 0
+            print(HANGMANPICS[hangman_index])
             print('Megoldásod eddig:')
             print(megoldas_rejtett)
             print('')
@@ -115,6 +208,11 @@ while True:
                 
             else:
                 print("Már megtippelted ezt a betűt!")
+            print('')
+            hangman_index = HANGMANPICS[eletek-1]
+            if hangman_index < 0:
+                hangman_index = 0
+            print(HANGMANPICS[hangman_index])
             print('Megoldásod eddig:')
             print(megoldas_rejtett)
             print('')
