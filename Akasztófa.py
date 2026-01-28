@@ -72,6 +72,15 @@ HANGMANPICS = [
 ''',
 '''
   +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''',
+'''
+  +---+
       |
       |
       |
@@ -92,11 +101,21 @@ HANGMANPICS = [
       '
 
 
+      |
+      |
+      |
+=========
+''',
+'''
+      '
 
 
-
+      
+      
+      
 =========
 '''
+
 ]
 #///////////////////////////////////////////////////////////////////
 
@@ -150,6 +169,7 @@ while True:
     except ValueError:
         print("Számot adj meg! \n")
 
+
 while True:
     while True:
         try:
@@ -163,6 +183,10 @@ while True:
             print(e)
     
     if tipp_betű == '0':
+        if eletek > 0:
+                print(HANGMANPICS[int(eletek)])
+        print('')
+        print(megoldas_rejtett)
         print('')
         tipp_szo = input(f'Tippeld meg a szót: (Ennyi tipped van még hátra: {tipp_szo_szama})')
         tipp_szo_szama -= 1
@@ -174,6 +198,7 @@ while True:
 
         elif tipp_szo !=  megoldas: 
             print("Nem találtad el a szót!")
+            print('')
             print(f'Már csak {tipp_szo_szama} tipped van hátra.')
 
     else:
@@ -188,10 +213,8 @@ while True:
                         megoldas_rejtett[i] = tipp_betű
             else:
                 print("Már megtippelted ezt a betűt!")
-            hangman_index = HANGMANPICS[eletek-1]
-            if hangman_index < 0:
-                hangman_index = 0
-            print(HANGMANPICS[hangman_index])
+            if eletek > 0:
+                print(HANGMANPICS[int(eletek)])
             print('Megoldásod eddig:')
             print(megoldas_rejtett)
             print('')
@@ -209,10 +232,6 @@ while True:
             else:
                 print("Már megtippelted ezt a betűt!")
             print('')
-            hangman_index = HANGMANPICS[eletek-1]
-            if hangman_index < 0:
-                hangman_index = 0
-            print(HANGMANPICS[hangman_index])
             print('Megoldásod eddig:')
             print(megoldas_rejtett)
             print('')
@@ -220,9 +239,13 @@ while True:
             print(helytelen_betűk)
             print('')
             eletek -= 1
+            if eletek > 0:
+                print(HANGMANPICS[int(eletek)])
             if eletek == 0:
+                print(HANGMANPICS[int(eletek)])
                 print('Meghaltál, vége a játéknak.')
-                print(f'A megoldás ez volt{megoldas}')
+                print('')
+                print(f'A megoldás ez volt: {megoldas}')
                 break
 
     if 'X' not in megoldas_rejtett:
